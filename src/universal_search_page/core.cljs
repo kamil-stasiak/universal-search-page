@@ -4,40 +4,36 @@
             [material-ui-icons :as icons]
             [goog.object :as gobj]
             ["@material-ui/core/styles" :refer [createMuiTheme withStyles]]
-            ["material-ui/colors" :as mui-colors]))
+            ["material-ui/colors" :as mui-colors]
+            [universal-search-page.pokemons :as pokemons]))
 
 (enable-console-print!)
 
 (defonce app-state (atom {:text "Search"}))
 
-(def bulbasaur
-  {:name        "Bulbasaur"
-   :types       "Grass/Poison"
-   :image       "https://cdn.bulbagarden.net/upload/2/21/001Bulbasaur.png"
-   :description "Bulbasaur is a dual-type Grass/Poison Pokémon introduced in Generation I.\n\nIt evolves into Ivysaur starting at level 16, which evolves into Venusaur starting at level 32.\n\nAlong with Charmander and Squirtle, Bulbasaur is one of three starter Pokémon of Kanto available at the beginning of Pokémon Red, Green, Blue, FireRed, and LeafGreen."})
-
 (defn search-bar []
   [:div.search-bar
    [:> mui/Input {:color "primary" :full-width true}]
    [:> mui/Fab {:color "secondary"}
-    [:> icons/Send]]])
+    [:> icons/Search]]])
 
 (defn search-result [props]
-  [:> mui/Card {:class-name "search-result"}
-   [:> mui/CardHeader {:title (get-in props [:pokemon :name]) :subheader (get-in props [:pokemon :name])}]
-   [:> mui/CardMedia {:image      (get-in props [:pokemon :image])
-                      :title      (get-in props [:pokemon :name])
-                      :class-name "media"}]
-   [:> mui/CardContent
-    [:> mui/Typography (get-in props [:pokemon :description])]]
-   [:> mui/CardActions]
-   ])
+  (let [pokemon (:pokemon props)]
+    [:> mui/Card {:class-name "search-result"}
+     [:> mui/CardHeader {:title (:name pokemon) :subheader (:types pokemon)}]
+     [:> mui/CardMedia {:image      (:image pokemon)
+                        :title      (:name pokemon)
+                        :class-name "media"}]
+     [:> mui/CardContent
+      [:> mui/Typography (:description pokemon)]]
+     [:> mui/CardActions]
+     ]))
 
 (defn search-results []
   [:div.search-results
-   [search-result {:pokemon bulbasaur}]
-   [search-result {:pokemon bulbasaur}]
-   [search-result {:pokemon bulbasaur}]
+   [search-result {:pokemon pokemons/bulbasaur}]
+   [search-result {:pokemon pokemons/charmander}]
+   [search-result {:pokemon pokemons/squirtle}]
    ])
 
 (defn universal-search-page []
