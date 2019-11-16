@@ -1,10 +1,11 @@
 .app {
     display: grid;
+    background-color: #eeeeee;
     grid-template-columns: auto 500px auto;
-    grid-template-rows: auto auto 400px;
+    grid-template-rows: 80px auto;
     grid-template-areas:
             ". search-bar ."
-            ". . .";
+            "search-results search-results search-results";
 }
 
 .search-bar {
@@ -12,4 +13,20 @@
     display: flex;
     justify-content: flex-start;
     align-items: baseline;
+}
+
+.search-results {
+    grid-area: search-results;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.search-result {
+    /*max-width: 345px;*/
+    width: 300px;
+    margin: 10px;
+}
+
+.search-result .media {
+    padding-top: 56.25%;
 }
