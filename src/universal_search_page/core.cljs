@@ -1,4 +1,4 @@
-(ns clojurescript-first.core
+(ns universal-search-page.core
   (:require [reagent.core :as reagent :refer [atom, reactify-component]]
             [material-ui :as mui]
             [material-ui-icons :as icons]
@@ -10,11 +10,11 @@
 
 (defonce app-state (atom {:text "Search"}))
 
-(defn hello-world []
+(defn universal-search-page []
   [:div.app
    [:div.search-bar
     [:> mui/Input {:color "primary" :full-width true}]
     [:> mui/Fab {:color "secondary"}
      [:> icons/Send]]]])
 
-(reagent/render-component [hello-world] (. js/document (getElementById "app")))
+(reagent/render-component [universal-search-page] (. js/document (getElementById "app")))
