@@ -1,12 +1,6 @@
 (ns universal-search-page.search-results
-  (:require [reagent.core :as reagent :refer [atom, reactify-component]]
-            [material-ui :as mui]
-            [material-ui-icons :as icons]
-            [goog.object :as gobj]
-            ["@material-ui/core/styles" :refer [createMuiTheme withStyles]]
-            ["material-ui/colors" :as mui-colors]
-            [universal-search-page.pokemons :refer [pokemons-list pokemon-to-card]]
-            [universal-search-page.search-bar :refer [search-bar]]))
+  (:require [reagent.core :as reagent]
+            [material-ui :as mui]))
 
 (defn search-result [{:keys [title subheader image description]}]
   [:> mui/Card {:class-name "search-result"}
@@ -20,5 +14,18 @@
 
 (defn search-results [{:keys [list]}]
   [:div.search-results
-   (for [element list]
-     [search-result (conj {:key element} element)])])
+   (map #(vector search-result (conj {:key %} %)) list)])
+
+; 1
+;(defn map-search [element]
+;  [search-result (conj {:key element} element)])
+
+; 2
+;(defn search-results [{:keys [list]}]
+;  [:div.search-results
+;   (map (fn [element] [search-result (conj {:key element} element)]) list)])
+;3
+;(defn search-results [{:keys [list]}]
+;  [:div.search-results
+;   (for [element list]
+;     [search-result (conj {:key element} element)])])
