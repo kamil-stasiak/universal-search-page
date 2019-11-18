@@ -7,7 +7,7 @@
             ["material-ui/colors" :as mui-colors]
             [universal-search-page.pokemons :refer [pokemons-list pokemon-to-card]]
             [universal-search-page.search-bar :refer [search-bar]]
-            [universal-search-page.search-results :refer [search-results]]))
+            [universal-search-page.search-results :refer [search-results-cards search-results-table]]))
 
 (enable-console-print!)
 
@@ -16,7 +16,8 @@
 (defn universal-search-page []
   [:div.app
    [search-bar]
-   [search-results {:list (map pokemon-to-card pokemons-list)}]
+   ;[search-results-card {:list (map pokemon-to-card pokemons-list)}]
+   [search-results-table {:list (map pokemon-to-card pokemons-list)}]
    ])
 
 (reagent/render-component [universal-search-page] (. js/document (getElementById "app")))

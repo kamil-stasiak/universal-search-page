@@ -15,10 +15,14 @@
     align-items: baseline;
 }
 
-.search-results {
+.search-results-cards {
     grid-area: search-results;
     display: flex;
     flex-wrap: wrap;
+}
+
+.search-results-table {
+    grid-area: search-results;
 }
 
 .search-result {
