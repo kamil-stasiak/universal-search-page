@@ -16,34 +16,21 @@
   [:div.search-results-cards
    (map #(vector search-result-card (conj {:key %} %)) list)])
 
+(defn search-result-table-row [{:keys [title description]}]
+  [:> mui/TableRow
+   [:> mui/TableCell {} title]
+   [:> mui/TableCell {} description]])
+
 (defn search-results-table [{:keys [list]}]
   [:div.search-results-table
-   [:> mui/Table
-    [:> mui/TableHead
-     [:> mui/TableRow
-      [:> mui/TableCell "Dessert (100g serving)"]
-      [:> mui/TableCell {:align "right"} "Calories"]
-      [:> mui/TableCell {:align "right"} "Fat (g)"]
-      [:> mui/TableCell {:align "right"} "Carbs (g)"]
-      [:> mui/TableCell {:align "right"} "Protein (g)"]]]
-    ]])
-
-;  [:Paper{:className "{classes.root}"}
-;[mui/Table {:className "{classes.table}" :aria-label "simple table"}
-; [mui/TableHead
-;  [mui/TableRow
-;   [mui/TableCell "Dessert (100g serving)"]
-;   [mui/TableCell {:align "right"} "Calories"]
-;   [mui/TableCell {:align "right"} "Fat&nbsp;(g)"]
-;   [mui/TableCell {:align "right"} "Carbs&nbsp;(g)"]
-;   [mui/TableCell {:align "right"} "Protein&nbsp;(g)"]]]
-; [mui/TableBody "{rows.map(row => ("
-;  [mui/TableRow {:key "{row.name}"}
-;   [mui/TableCell {:component "th" :scope "row"} "{row.name}"]
-;   [mui/TableCell {:align "right"} "{row.calories}"]
-;   [mui/TableCell {:align "right"} "{row.fat}"]
-;   [mui/TableCell {:align "right"} "{row.carbs}"]
-;   [mui/TableCell {:align "right"} "{row.protein}"]] "))}"]]
+   [:> mui/Paper
+    [:> mui/Table
+     [:> mui/TableHead
+      [:> mui/TableRow
+       [:> mui/TableCell "Title"]
+       [:> mui/TableCell {:align "right"} "Description"]]]
+     [:> mui/TableBody
+      (map #(vector search-result-table-row (conj {:key %} %)) list)]]]])
 
 ; 1
 ;(defn map-search [element]
